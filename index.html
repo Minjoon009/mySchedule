@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Life Schedule 2026</title>
+    <link href="https://mmwebfonts.com/ff/pyidaungsu.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        body { font-family: 'Pyidaungsu', sans-serif; background-color: #f4f7f6; padding: 20px; margin: 0; }
+        .container { max-width: 950px; margin: auto; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        
+        /* Tabs Styling */
+        .tab-header { display: flex; background: #333; flex-wrap: wrap; }
+        .tab-btn { flex: 1; padding: 18px 10px; border: none; background: none; color: #fff; cursor: pointer; font-size: 16px; font-weight: bold; min-width: 120px; }
+        .tab-btn.active-blue { background: #1a73e8; color: white; }
+        .tab-btn.active-red { background: #d32f2f; color: white; }
+        
+        .tab-content { display: none; padding: 40px; }
+        .tab-content.active { display: block; }
+
+        h2 { text-align: center; margin-bottom: 25px; padding-bottom: 10px; font-size: 1.5rem; }
+        
+        /* Responsive Table Wrapper */
+        .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; min-width: 600px; }
+        th { color: white; padding: 15px; text-align: left; }
+        td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 14px; }
+
+        /* Themes */
+        #weekdays h2 { color: #1a73e8; border-bottom: 3px solid #1a73e8; }
+        #weekdays th { background: #1a73e8; }
+        #weekend h2 { color: #d32f2f; border-bottom: 3px solid #d32f2f; }
+        #weekend th { background: #d32f2f; }
+
+        .meal-row { background-color: #fffde7 !important; font-style: italic; }
+        .badge { padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; white-space: nowrap; }
+        .bg-tech { background: #e3f2fd; color: #1976d2; }
+        .bg-jap { background: #e8f5e9; color: #388e3c; }
+
+        .btn-container { text-align: center; padding: 20px; background: #f8f9fa; }
+        .download-btn { padding: 12px 30px; border-radius: 25px; border: none; cursor: pointer; font-weight: bold; color: white; transition: 0.3s; width: 100%; max-width: 300px; font-size: 16px; }
+        .btn-blue { background: #1a73e8; }
+        .btn-red { background: #d32f2f; }
+
+        /* --- Mobile Responsive Rules --- */
+        @media screen and (max-width: 600px) {
+            body { padding: 10px; }
+            .tab-content { padding: 20px 15px; }
+            h2 { font-size: 1.2rem; margin-bottom: 15px; }
+            .tab-btn { padding: 12px 5px; font-size: 14px; }
+            td { padding: 10px 8px; font-size: 13px; }
+            .download-btn { padding: 10px 20px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="tab-header" id="tabHeader">
+        <button class="tab-btn active-blue" onclick="openTab(event, 'weekdays', 'blue')">Weekdays (Mon-Thu)</button>
+        <button class="tab-btn" onclick="openTab(event, 'weekend', 'red')">Weekend (Fri-Sun)</button>
+    </div>
+
+    <!-- Weekdays Tab -->
+    <div id="weekdays" class="tab-content active">
+        <h2>မနက် ၉ နာရီနိုး - Weekday Schedule (Blue)</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Time</th><th>Activity Detail</th><th>Category</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="meal-row"><td>09:00 AM - 10:00 AM</td><td>နိုးထခြင်းနှင့် နံနက်စာစားခြင်း (Breakfast)</td><td>Personal</td></tr>
+                    <tr><td>10:00 AM - 12:30 PM</td><td>React/TS Project Planning & Research</td><td><span class="badge bg-tech">IT/Dev</span></td></tr>
+                    <tr class="meal-row"><td>12:30 PM - 01:30 PM</td><td>နေ့လယ်စာစားခြင်း (Lunch) & အတန်းအတွက်ပြင်ဆင်ခြင်း</td><td>Personal</td></tr>
+                    <tr><td>01:30 PM - 04:30 PM</td><td>ဂျပန်စာ N3 အတန်းတက်ခြင်း (Japanese Class)</td><td><span class="badge bg-jap">Language</span></td></tr>
+                    <tr><td>05:30 PM - 08:30 PM</td><td>Deep Coding: Enterprise Dashboard Project</td><td><span class="badge bg-tech">IT/Dev</span></td></tr>
+                    <tr class="meal-row"><td>08:30 PM - 09:30 PM</td><td>ညစာစားခြင်း (Dinner) & အနားယူခြင်း</td><td>Personal</td></tr>
+                    <tr><td>09:30 PM - 11:30 PM</td><td>ဂျပန်စာအိမ်စာနှင့် စာပြန်နွှေးခြင်း</td><td><span class="badge bg-jap">Language</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Weekend Tab -->
+    <div id="weekend" class="tab-content">
+        <h2>Weekend Roadmap - Red Theme</h2>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Time</th><th>Activity Detail</th><th>Category</th></tr>
+                </thead>
+                <tbody>
+                    <tr class="meal-row"><td>09:00 AM - 10:00 AM</td><td>နံနက်စာစားခြင်း (Breakfast) & Relax</td><td>Personal</td></tr>
+                    <tr><td>10:00 AM - 01:00 PM</td><td>Deep Coding: Project Advanced Features</td><td><span class="badge bg-tech">IT/Dev</span></td></tr>
+                    <tr class="meal-row"><td>01:00 PM - 02:00 PM</td><td>နေ့လယ်စာစားခြင်း (Lunch) & အနားယူခြင်း</td><td>Personal</td></tr>
+                    <tr><td>02:00 PM - 05:00 PM</td><td>Frontend Optimization & Portfolio Prep</td><td><span class="badge bg-tech">IT/Dev</span></td></tr>
+                    <tr><td>05:00 PM - 08:30 PM</td><td>Music Production / Creative Content</td><td>Personal</td></tr>
+                    <tr class="meal-row"><td>08:30 PM - 09:30 PM</td><td>ညစာစားခြင်း (Dinner) & Weekend Chill</td><td>Personal</td></tr>
+                    <tr><td>09:30 PM - 11:00 PM</td><td>Sunday Review & Next Week Planning</td><td><span class="badge bg-jap">Planning</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="btn-container">
+        <button id="dlBtn" class="download-btn btn-blue" onclick="downloadPDF()">Download Current Tab as PDF</button>
+    </div>
+</div>
+
+<script>
+    function openTab(evt, tabName, color) {
+        var i, tabcontent, tablinks, btn = document.getElementById('dlBtn');
+        tabcontent = document.getElementsByClassName("tab-content");
+        for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; tabcontent[i].classList.remove("active"); }
+        tablinks = document.getElementsByClassName("tab-btn");
+        for (i = 0; i < tablinks.length; i++) { 
+            tablinks[i].classList.remove("active-blue", "active-red");
+        }
+        
+        document.getElementById(tabName).style.display = "block";
+        document.getElementById(tabName).classList.add("active");
+        
+        if(color === 'blue') {
+            evt.currentTarget.classList.add("active-blue");
+            btn.className = "download-btn btn-blue";
+        } else {
+            evt.currentTarget.classList.add("active-red");
+            btn.className = "download-btn btn-red";
+        }
+    }
+
+    function downloadPDF() {
+        const activeTab = document.querySelector(".tab-content.active");
+        const options = {
+            margin: 0.3,
+            filename: activeTab.id + '_schedule_2026.pdf',
+            image: { type: 'jpeg', quality: 1 },
+            html2canvas: { scale: 2, useCORS: true },
+            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+        };
+        html2pdf().set(options).from(activeTab).save();
+    }
+</script>
+
+</body>
+</html>
