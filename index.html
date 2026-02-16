@@ -3,146 +3,748 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Life Schedule 2026</title>
-    <link href="https://mmwebfonts.com/ff/pyidaungsu.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title>✨ Live Interactive Daily Planner ✨</title>
     <style>
-        body { font-family: 'Pyidaungsu', sans-serif; background-color: #f4f7f6; padding: 20px; margin: 0; }
-        .container { max-width: 950px; margin: auto; background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
-        /* Tabs Styling */
-        .tab-header { display: flex; background: #333; flex-wrap: wrap; }
-        .tab-btn { flex: 1; padding: 18px 10px; border: none; background: none; color: #fff; cursor: pointer; font-size: 16px; font-weight: bold; min-width: 120px; }
-        .tab-btn.active-blue { background: #1a73e8; color: white; }
-        .tab-btn.active-red { background: #d32f2f; color: white; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         
-        .tab-content { display: none; padding: 40px; }
-        .tab-content.active { display: block; }
-
-        h2 { text-align: center; margin-bottom: 25px; padding-bottom: 10px; font-size: 1.5rem; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
         
-        /* Responsive Table Wrapper */
-        .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; min-width: 600px; }
-        th { color: white; padding: 15px; text-align: left; }
-        td { padding: 12px 15px; border-bottom: 1px solid #eee; font-size: 14px; }
-
-        /* Themes */
-        #weekdays h2 { color: #1a73e8; border-bottom: 3px solid #1a73e8; }
-        #weekdays th { background: #1a73e8; }
-        #weekend h2 { color: #d32f2f; border-bottom: 3px solid #d32f2f; }
-        #weekend th { background: #d32f2f; }
-
-        .meal-row { background-color: #fffde7 !important; font-style: italic; }
-        .badge { padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: bold; white-space: nowrap; }
-        .bg-tech { background: #e3f2fd; color: #1976d2; }
-        .bg-jap { background: #e8f5e9; color: #388e3c; }
-
-        .btn-container { text-align: center; padding: 20px; background: #f8f9fa; }
-        .download-btn { padding: 12px 30px; border-radius: 25px; border: none; cursor: pointer; font-weight: bold; color: white; transition: 0.3s; width: 100%; max-width: 300px; font-size: 16px; }
-        .btn-blue { background: #1a73e8; }
-        .btn-red { background: #d32f2f; }
-
-        /* --- Mobile Responsive Rules --- */
-        @media screen and (max-width: 600px) {
-            body { padding: 10px; }
-            .tab-content { padding: 20px 15px; }
-            h2 { font-size: 1.2rem; margin-bottom: 15px; }
-            .tab-btn { padding: 12px 5px; font-size: 14px; }
-            td { padding: 10px 8px; font-size: 13px; }
-            .download-btn { padding: 10px 20px; font-size: 14px; }
+        /* Animated background elements */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        body::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            bottom: -150px;
+            right: -150px;
+            animation: float 25s infinite ease-in-out reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(50px, 50px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+        
+        .planner-container {
+            max-width: 1300px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Motivational Header */
+        .motivation-header {
+            background: linear-gradient(135deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            color: white;
+            padding: 25px 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .motivation-header::after {
+            content: '✨';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 150px;
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        .quote-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .quote-icon {
+            font-size: 3em;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .quote-text {
+            font-size: 1.3em;
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            line-height: 1.4;
+        }
+        
+        .quote-author {
+            display: block;
+            font-size: 0.8em;
+            margin-top: 5px;
+            opacity: 0.9;
+            font-style: italic;
+        }
+        
+        /* Live Time Header */
+        .live-header {
+            background: white;
+            padding: 25px 30px;
+            border-bottom: 3px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .date-time-container {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: 2px solid #667eea40;
+        }
+        
+        .pulse-dot {
+            width: 16px;
+            height: 16px;
+            background: #4ade80;
+            border-radius: 50%;
+            position: relative;
+        }
+        
+        .pulse-dot::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #4ade80;
+            border-radius: 50%;
+            animation: pulseRing 2s infinite;
+        }
+        
+        @keyframes pulseRing {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.5); opacity: 0; }
+        }
+        
+        .live-text {
+            font-weight: 700;
+            color: #4a5568;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9em;
+        }
+        
+        .datetime-display {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 12px 30px;
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+        
+        .day-name {
+            font-size: 1.2em;
+            margin-right: 10px;
+        }
+        
+        .date-number {
+            font-size: 1.4em;
+            font-weight: 800;
+        }
+        
+        .status-card {
+            background: linear-gradient(135deg, #f8f9ff, #ffffff);
+            padding: 15px 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border: 2px dashed #667eea40;
+        }
+        
+        .current-activity {
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .activity-name {
+            color: #667eea;
+            font-size: 1.2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea20, #764ba220);
+            padding: 5px 15px;
+            border-radius: 30px;
+        }
+        
+        .progress-section {
+            padding: 0 30px 20px 30px;
+        }
+        
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #4a5568;
+            font-weight: 500;
+        }
+        
+        .progress-percentage {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4ade80, #3b82f6, #8b5cf6);
+            transition: width 0.5s ease;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .planner-table {
+            padding: 20px 30px 30px 30px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95em;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        th {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: white;
+            font-weight: 600;
+            padding: 20px 15px;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        th:first-child { border-radius: 15px 0 0 0; }
+        th:last-child { border-radius: 0 15px 0 0; }
+        
+        td {
+            padding: 18px 15px;
+            border-bottom: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+        
+        /* Current activity row style */
+        .current-activity-row {
+            background: linear-gradient(135deg, #f0f9ff, #e6f0ff);
+            border-left: 6px solid #4ade80;
+            box-shadow: 0 5px 15px rgba(74, 222, 128, 0.2);
+            transform: scale(1.01);
+            position: relative;
+            animation: glow 2s infinite;
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 5px 20px rgba(74, 222, 128, 0.3); }
+            50% { box-shadow: 0 10px 30px rgba(74, 222, 128, 0.5); }
+        }
+        
+        .current-activity-row td {
+            border-bottom: 2px solid #4ade80;
+        }
+        
+        /* Past activities */
+        .past-activity {
+            opacity: 0.7;
+            background: linear-gradient(135deg, #f8f9fa, #f1f3f5);
+        }
+        
+        /* Future activities */
+        .future-activity {
+            background: white;
+        }
+        
+        .time-col {
+            font-weight: 700;
+            color: #2d3748;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+        }
+        
+        .activity-col {
+            font-weight: 600;
+            color: #1a202c;
+        }
+        
+        .details-col {
+            color: #4a5568;
+            line-height: 1.6;
+        }
+        
+        .details-col ul {
+            margin: 5px 0 0 20px;
+        }
+        
+        .details-col li {
+            margin: 3px 0;
+        }
+        
+        .sleep-row {
+            background: linear-gradient(135deg, #1a1a2e10, #16213e10);
+            border-top: 3px solid #667eea;
+        }
+        
+        /* Motivational Footer */
+        .motivation-footer {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 30px;
+            color: white;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .motivation-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .motivation-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .card-icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .card-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #FFCC70;
+        }
+        
+        .card-text {
+            font-size: 0.9em;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+        
+        .achievement-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #FFD700, #FFA500);
+            color: #1a1a2e;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            margin-top: 15px;
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0%, 100% { box-shadow: 0 0 20px #FFD700; }
+            50% { box-shadow: 0 0 40px #FFA500; }
+        }
+        
+        /* Time icons */
+        .time-icon {
+            display: inline-block;
+            margin-right: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .live-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .quote-text {
+                font-size: 1.1em;
+            }
+            
+            .datetime-display {
+                width: 100%;
+                text-align: center;
+            }
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <div class="tab-header" id="tabHeader">
-        <button class="tab-btn active-blue" onclick="openTab(event, 'weekdays', 'blue')">Weekdays (Mon-Thu)</button>
-        <button class="tab-btn" onclick="openTab(event, 'weekend', 'red')">Weekend (Fri-Sun)</button>
-    </div>
-
-    <!-- Weekdays Tab -->
-    <div id="weekdays" class="tab-content active">
-        <h2>မနက် ၉ နာရီနိုး - Weekday Schedule (Blue)</h2>
-        <div class="table-container">
-            <table>
+    <div class="planner-container" id="plannerContainer">
+        <!-- Motivational Header -->
+        <div class="motivation-header">
+            <div class="quote-container">
+                <span class="quote-icon">🌟</span>
+                <div class="quote-text">
+                    "The secret of getting ahead is getting started. Every moment is a fresh beginning."
+                    <span class="quote-author">— Mark Twain</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Live Time Header -->
+        <div class="live-header">
+            <div class="date-time-container">
+                <div class="live-indicator">
+                    <span class="pulse-dot"></span>
+                    <span class="live-text">LIVE TRACKING</span>
+                </div>
+                <div class="datetime-display" id="datetimeDisplay">
+                    <span class="day-name" id="dayName"></span>
+                    <span class="date-number" id="dateNumber"></span>
+                    <span id="timeDisplay"></span>
+                </div>
+            </div>
+            <div class="status-card" id="statusCard">
+                <span>🎯 Current:</span>
+                <span class="activity-name" id="currentActivity">Loading...</span>
+            </div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <span>Today's Progress</span>
+                <span class="progress-percentage" id="progressPercentage">0%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+        </div>
+        
+        <!-- Main Planner Table -->
+        <div class="planner-table">
+            <table id="plannerTable">
                 <thead>
-                    <tr><th>Time</th><th>Activity Detail</th><th>Category</th></tr>
+                    <tr>
+                        <th>⏰ TIME</th>
+                        <th>📋 ACTIVITY</th>
+                        <th>✨ DETAILS & MOTIVATION</th>
+                    </tr>
                 </thead>
-                <tbody>
-                    <tr class="meal-row"><td>09:00 AM - 10:00 AM</td><td>နိုးထခြင်းနှင့် နံနက်စာစားခြင်း (Breakfast)</td><td>Personal</td></tr>
-                    <tr><td>10:00 AM - 12:30 PM</td><td>React/TS Project Planning & Research</td><td><span class="badge bg-tech">IT/Dev</span></td></tr>
-                    <tr class="meal-row"><td>12:30 PM - 01:30 PM</td><td>နေ့လယ်စာစားခြင်း (Lunch) & အတန်းအတွက်ပြင်ဆင်ခြင်း</td><td>Personal</td></tr>
-                    <tr><td>01:30 PM - 04:30 PM</td><td>ဂျပန်စာ N3 အတန်းတက်ခြင်း (Japanese Class)</td><td><span class="badge bg-jap">Language</span></td></tr>
-                    <tr><td>05:30 PM - 08:30 PM</td><td>Deep Coding: Enterprise Dashboard Project</td><td><span class="badge bg-tech">IT/Dev</span></td></tr>
-                    <tr class="meal-row"><td>08:30 PM - 09:30 PM</td><td>ညစာစားခြင်း (Dinner) & အနားယူခြင်း</td><td>Personal</td></tr>
-                    <tr><td>09:30 PM - 11:30 PM</td><td>ဂျပန်စာအိမ်စာနှင့် စာပြန်နွှေးခြင်း</td><td><span class="badge bg-jap">Language</span></td></tr>
+                <tbody id="tableBody">
+                    <!-- Table will be populated by JavaScript -->
                 </tbody>
             </table>
         </div>
-    </div>
-
-    <!-- Weekend Tab -->
-    <div id="weekend" class="tab-content">
-        <h2>Weekend Roadmap - Red Theme</h2>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr><th>Time</th><th>Activity Detail</th><th>Category</th></tr>
-                </thead>
-                <tbody>
-                    <tr class="meal-row"><td>09:00 AM - 10:00 AM</td><td>နံနက်စာစားခြင်း (Breakfast) & Relax</td><td>Personal</td></tr>
-                    <tr><td>10:00 AM - 01:00 PM</td><td>Deep Coding: Project Advanced Features</td><td><span class="badge bg-tech">IT/Dev</span></td></tr>
-                    <tr class="meal-row"><td>01:00 PM - 02:00 PM</td><td>နေ့လယ်စာစားခြင်း (Lunch) & အနားယူခြင်း</td><td>Personal</td></tr>
-                    <tr><td>02:00 PM - 05:00 PM</td><td>Frontend Optimization & Portfolio Prep</td><td><span class="badge bg-tech">IT/Dev</span></td></tr>
-                    <tr><td>05:00 PM - 08:30 PM</td><td>Music Production / Creative Content</td><td>Personal</td></tr>
-                    <tr class="meal-row"><td>08:30 PM - 09:30 PM</td><td>ညစာစားခြင်း (Dinner) & Weekend Chill</td><td>Personal</td></tr>
-                    <tr><td>09:30 PM - 11:00 PM</td><td>Sunday Review & Next Week Planning</td><td><span class="badge bg-jap">Planning</span></td></tr>
-                </tbody>
-            </table>
+        
+        <!-- Motivational Footer -->
+        <div class="motivation-footer">
+            <div class="motivation-card">
+                <span class="card-icon">🌅</span>
+                <div class="card-title">Morning Energy</div>
+                <div class="card-text">Your morning routine sets the tone for victory. Every sunrise is an invitation to shine brighter.</div>
+            </div>
+            <div class="motivation-card">
+                <span class="card-icon">📚</span>
+                <div class="card-title">Learning Zone</div>
+                <div class="card-text">Japanese & Coding: Building bridges to your future, one lesson at a time.</div>
+            </div>
+            <div class="motivation-card">
+                <span class="card-icon">💪</span>
+                <div class="card-title">Body & Mind</div>
+                <div class="card-text">Exercise and rest are not breaks from your journey—they are essential steps forward.</div>
+            </div>
+            <div class="achievement-badge">
+                ⭐ TODAY IS YOUR DAY ⭐
+            </div>
         </div>
     </div>
 
-    <div class="btn-container">
-        <button id="dlBtn" class="download-btn btn-blue" onclick="downloadPDF()">Download Current Tab as PDF</button>
-    </div>
-</div>
+    <script>
+        // Schedule data
+        const schedule = [
+            { start: "8:30", end: "8:45", period: "AM", activity: "Wake Up & Hydrate", icon: "🌅", details: "💧 Drink water • Make bed • 5 min stretch • Set intention for the day", motivation: "Rise and shine! Today is full of possibilities." },
+            { start: "8:45", end: "9:15", period: "AM", activity: "Morning Exercise", icon: "💪", details: "Option A: Cardio (jump rope/jog) • Option B: Strength training • Option C: YouTube workout", motivation: "Sweat now, shine later. Your body thanks you!" },
+            { start: "9:15", end: "9:45", period: "AM", activity: "Shower & Get Ready", icon: "🚿", details: "Freshen up • Skincare routine • Dress for success", motivation: "Look good, feel good, do good." },
+            { start: "9:45", end: "10:30", period: "AM", activity: "Breakfast & Planning", icon: "🍳", details: "Healthy breakfast • Review goals • Plan your winning strategy", motivation: "Fuel your body and mind for greatness." },
+            { start: "10:30", end: "11:00", period: "AM", activity: "Japanese (Vocabulary)", icon: "📝", details: "Anki/Flashcards review • 30 mins of focused learning", motivation: "言葉は力なり (Words are power)" },
+            { start: "11:00", end: "11:45", period: "AM", activity: "Japanese (Grammar)", icon: "📚", details: "Textbook study • Grammar patterns • Note-taking", motivation: "毎日少しずつ進歩 (Progress a little each day)" },
+            { start: "11:45", end: "12:00", period: "PM", activity: "Japanese (Listening)", icon: "🎧", details: "Anime/podcast/music • No subtitles challenge", motivation: "Train your ears, open your world." },
+            { start: "12:00", end: "1:00", period: "PM", activity: "Make Lunch", icon: "👨‍🍳", details: "Cook a meal • Listen to podcast/music • Enjoy the process", motivation: "Cooking is love made visible." },
+            { start: "1:00", end: "1:45", period: "PM", activity: "Eat Lunch", icon: "🍽️", details: "Mindful eating • No distractions • Let food settle", motivation: "Nourish to flourish." },
+            { start: "1:45", end: "3:15", period: "PM", activity: "Nap", icon: "😴", details: "Power nap • Set alarm for 3:15 PM", motivation: "Rest is not idle, it's essential." },
+            { start: "3:15", end: "4:30", period: "PM", activity: "Social Media & Relax", icon: "📱", details: "Check platforms • Reply to messages • Stand every 30 mins", motivation: "Connect mindfully, not mindlessly." },
+            { start: "4:30", end: "6:00", period: "PM", activity: "Free Time / Light Review", icon: "🎨", details: "Review Japanese • Read • Tidy up • Creative time", motivation: "Balance is the key to consistency." },
+            { start: "6:00", end: "7:00", period: "PM", activity: "Evening Walk", icon: "🚶", details: "Phone silent • Connect with nature • Breathe deeply", motivation: "Walk as if you're kissing the earth with your feet." },
+            { start: "7:00", end: "8:00", period: "PM", activity: "Evening Relaxation", icon: "🌆", details: "Snack/tea • Watch show • Listen to music", motivation: "Unwind to rewind." },
+            { start: "8:00", end: "8:30", period: "PM", activity: "Shower & Skincare", icon: "🧖", details: "Warm shower • Skincare routine • Relax muscles", motivation: "Self-care is not selfish, it's necessary." },
+            { start: "8:30", end: "9:00", period: "PM", activity: "Prepare for Coding", icon: "💻", details: "Set up computer • Review yesterday's code • Plan tonight's goals", motivation: "Code before the world sleeps." },
+            { start: "9:00", end: "9:50", period: "PM", activity: "Coding (Deep Work)", icon: "⚡", details: "New concept • Project work • Focused learning", motivation: "Every line of code is a step toward mastery." },
+            { start: "9:50", end: "10:00", period: "PM", activity: "Coding Break", icon: "💧", details: "Stand up • Stretch • Hydrate", motivation: "Short breaks, long gains." },
+            { start: "10:00", end: "10:50", period: "PM", activity: "Coding (Practice)", icon: "⌨️", details: "Exercises • Debugging • Build something", motivation: "Practice doesn't make perfect, it makes progress." },
+            { start: "10:50", end: "11:00", period: "PM", activity: "Coding (Reflect)", icon: "✍️", details: "Write down 1 thing learned today", motivation: "Reflection turns experience into insight." },
+            { start: "11:00", end: "11:30", period: "PM", activity: "Wind Down (Read)", icon: "📖", details: "No screens • Physical book • Calm mind", motivation: "Read to dream." },
+            { start: "11:30", end: "11:45", period: "PM", activity: "Wind Down (Journal)", icon: "📓", details: "Journal thoughts • Plan tomorrow", motivation: "Clear mind, clear path." },
+            { start: "11:45", end: "12:00", period: "AM", activity: "Wind Down (Prepare)", icon: "🌙", details: "Dim lights • Deep breathing • Gratitude", motivation: "Grateful today, ready for tomorrow." },
+            { start: "12:00", end: "8:30", period: "AM", activity: "Sleep", icon: "😴", details: "Rest and recharge • Dream big", motivation: "Sleep is the best meditation." }
+        ];
 
-<script>
-    function openTab(evt, tabName, color) {
-        var i, tabcontent, tablinks, btn = document.getElementById('dlBtn');
-        tabcontent = document.getElementsByClassName("tab-content");
-        for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; tabcontent[i].classList.remove("active"); }
-        tablinks = document.getElementsByClassName("tab-btn");
-        for (i = 0; i < tablinks.length; i++) { 
-            tablinks[i].classList.remove("active-blue", "active-red");
+        // Convert time string to minutes for comparison
+        function timeToMinutes(timeStr, period) {
+            let [hours, minutes] = timeStr.split(':').map(Number);
+            if (period === "PM" && hours !== 12) hours += 12;
+            if (period === "AM" && hours === 12) hours = 0;
+            return hours * 60 + minutes;
         }
-        
-        document.getElementById(tabName).style.display = "block";
-        document.getElementById(tabName).classList.add("active");
-        
-        if(color === 'blue') {
-            evt.currentTarget.classList.add("active-blue");
-            btn.className = "download-btn btn-blue";
-        } else {
-            evt.currentTarget.classList.add("active-red");
-            btn.className = "download-btn btn-red";
+
+        // Get current time in minutes
+        function getCurrentMinutes() {
+            const now = new Date();
+            return now.getHours() * 60 + now.getMinutes();
         }
-    }
 
-    function downloadPDF() {
-        const activeTab = document.querySelector(".tab-content.active");
-        const options = {
-            margin: 0.3,
-            filename: activeTab.id + '_schedule_2026.pdf',
-            image: { type: 'jpeg', quality: 1 },
-            html2canvas: { scale: 2, useCORS: true },
-            jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-        };
-        html2pdf().set(options).from(activeTab).save();
-    }
-</script>
+        // Check if current time is between start and end
+        function isTimeBetween(start, end, startPeriod, endPeriod) {
+            const current = getCurrentMinutes();
+            let startMinutes = timeToMinutes(start, startPeriod);
+            let endMinutes = timeToMinutes(end, endPeriod);
+            
+            // Handle overnight activities (like sleep)
+            if (endMinutes < startMinutes) {
+                return current >= startMinutes || current < endMinutes;
+            }
+            
+            return current >= startMinutes && current < endMinutes;
+        }
 
+        // Format current date and time
+        function updateDateTime() {
+            const now = new Date();
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            
+            const dayName = days[now.getDay()];
+            const month = months[now.getMonth()];
+            const date = now.getDate();
+            const year = now.getFullYear();
+            
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            hours = hours % 12;
+            hours = hours ? hours : 12; // 0 should be 12
+            
+            document.getElementById('dayName').textContent = dayName + ',';
+            document.getElementById('dateNumber').textContent = `${month} ${date}, ${year}`;
+            document.getElementById('timeDisplay').textContent = ` 🕐 ${hours}:${minutes}:${seconds} ${ampm}`;
+        }
+
+        // Calculate day progress percentage
+        function updateProgress() {
+            const now = new Date();
+            const totalDayMinutes = 24 * 60;
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            const percentage = (currentMinutes / totalDayMinutes) * 100;
+            
+            document.getElementById('progressPercentage').textContent = Math.round(percentage) + '%';
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+
+        // Render table and update current activity
+        function renderTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            let currentActivityFound = null;
+            
+            schedule.forEach((item, index) => {
+                const row = document.createElement('tr');
+                
+                // Check if this is the current activity
+                const isCurrent = isTimeBetween(item.start, item.end, item.period, item.period);
+                
+                // Check if activity is in the past
+                const isPast = () => {
+                    const current = getCurrentMinutes();
+                    const itemStart = timeToMinutes(item.start, item.period);
+                    const itemEnd = timeToMinutes(item.end, item.period);
+                    
+                    // Handle overnight activities
+                    if (itemEnd < itemStart) {
+                        return current >= itemEnd && current < itemStart ? false : current >= itemStart;
+                    }
+                    
+                    return current >= itemEnd;
+                };
+                
+                const pastActivity = isPast();
+                
+                // Apply appropriate classes
+                if (isCurrent) {
+                    row.className = 'current-activity-row';
+                    currentActivityFound = item;
+                } else if (pastActivity && item.activity !== "Sleep") {
+                    row.className = 'past-activity';
+                } else {
+                    row.className = 'future-activity';
+                }
+                
+                // Special class for sleep row
+                if (item.activity === "Sleep") {
+                    row.classList.add('sleep-row');
+                }
+                
+                // Time display
+                const timeDisplay = `${item.start}–${item.end} ${item.period}`;
+                
+                // Activity with icon
+                const activityDisplay = `${item.icon} ${item.activity}`;
+                
+                // Details with motivation
+                const detailsDisplay = `
+                    <div>${item.details}</div>
+                    <div style="color: #8b5cf6; font-style: italic; margin-top: 8px; font-size: 0.9em;">
+                        💭 ${item.motivation}
+                    </div>
+                `;
+                
+                row.innerHTML = `
+                    <td class="time-col">⏱️ ${timeDisplay}</td>
+                    <td class="activity-col">${activityDisplay}</td>
+                    <td class="details-col">${detailsDisplay}</td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+            
+            // Update current activity display
+            if (currentActivityFound) {
+                document.getElementById('currentActivity').textContent = 
+                    `${currentActivityFound.icon} ${currentActivityFound.activity}`;
+            } else {
+                document.getElementById('currentActivity').textContent = '🎉 Between activities';
+            }
+        }
+
+        // Update everything
+        function updateAll() {
+            updateDateTime();
+            updateProgress();
+            renderTable();
+        }
+
+        // Initial render
+        updateAll();
+        
+        // Update every second
+        setInterval(updateAll, 1000);
+    </script>
 </body>
 </html>
