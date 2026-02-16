@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>✨ Live Interactive Daily Planner ✨</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>✨ Mobile Interactive Daily Planner ✨</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
         
@@ -19,59 +19,60 @@
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding: 20px;
+            padding: 10px;
             position: relative;
             overflow-x: hidden;
         }
         
-        /* Animated background elements */
+        /* Animated background elements - scaled for mobile */
         body::before {
             content: '';
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 150px;
+            height: 150px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            top: -100px;
-            left: -100px;
+            top: -50px;
+            left: -50px;
             animation: float 20s infinite ease-in-out;
         }
         
         body::after {
             content: '';
             position: absolute;
-            width: 400px;
-            height: 400px;
+            width: 200px;
+            height: 200px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 50%;
-            bottom: -150px;
-            right: -150px;
+            bottom: -75px;
+            right: -75px;
             animation: float 25s infinite ease-in-out reverse;
         }
         
         @keyframes float {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(50px, 50px) rotate(120deg); }
-            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            33% { transform: translate(25px, 25px) rotate(120deg); }
+            66% { transform: translate(-10px, 10px) rotate(240deg); }
         }
         
         .planner-container {
-            max-width: 1300px;
+            max-width: 500px;
             width: 100%;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            border-radius: 40px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(255, 255, 255, 0.1);
             overflow: hidden;
             position: relative;
             z-index: 10;
             animation: slideUp 0.8s ease-out;
+            margin: 5px;
         }
         
         @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(50px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
@@ -79,11 +80,11 @@
             }
         }
         
-        /* Motivational Header */
+        /* Motivational Header - Mobile Optimized */
         .motivation-header {
             background: linear-gradient(135deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
             color: white;
-            padding: 25px 30px;
+            padding: 16px 15px;
             position: relative;
             overflow: hidden;
         }
@@ -91,33 +92,34 @@
         .motivation-header::after {
             content: '✨';
             position: absolute;
-            top: -20px;
-            right: -20px;
-            font-size: 150px;
+            top: -10px;
+            right: -10px;
+            font-size: 80px;
             opacity: 0.1;
             transform: rotate(15deg);
         }
         
         .quote-container {
             display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 10px;
+            flex-wrap: nowrap;
         }
         
         .quote-icon {
-            font-size: 3em;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2));
+            font-size: 2em;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
             animation: bounce 2s infinite;
+            flex-shrink: 0;
         }
         
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-5px); }
         }
         
         .quote-text {
-            font-size: 1.3em;
+            font-size: 0.95em;
             font-weight: 500;
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
             line-height: 1.4;
@@ -125,47 +127,46 @@
         
         .quote-author {
             display: block;
-            font-size: 0.8em;
-            margin-top: 5px;
+            font-size: 0.75em;
+            margin-top: 3px;
             opacity: 0.9;
             font-style: italic;
         }
         
-        /* Live Time Header */
+        /* Live Time Header - Mobile Optimized */
         .live-header {
             background: white;
-            padding: 25px 30px;
-            border-bottom: 3px solid #f0f0f0;
+            padding: 15px;
+            border-bottom: 2px solid #f0f0f0;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-direction: column;
+            gap: 12px;
         }
         
         .date-time-container {
             display: flex;
-            align-items: center;
-            gap: 25px;
-            flex-wrap: wrap;
+            flex-direction: column;
+            gap: 10px;
         }
         
         .live-indicator {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: linear-gradient(135deg, #667eea20, #764ba220);
-            padding: 12px 25px;
-            border-radius: 50px;
+            padding: 8px 15px;
+            border-radius: 30px;
             border: 2px solid #667eea40;
+            align-self: flex-start;
         }
         
         .pulse-dot {
-            width: 16px;
-            height: 16px;
+            width: 12px;
+            height: 12px;
             background: #4ade80;
             border-radius: 50%;
             position: relative;
+            flex-shrink: 0;
         }
         
         .pulse-dot::before {
@@ -188,74 +189,85 @@
             color: #4a5568;
             text-transform: uppercase;
             letter-spacing: 1px;
-            font-size: 0.9em;
+            font-size: 0.8em;
         }
         
         .datetime-display {
             background: linear-gradient(135deg, #667eea, #764ba2);
-            padding: 12px 30px;
-            border-radius: 50px;
+            padding: 12px 15px;
+            border-radius: 30px;
             color: white;
             font-weight: 600;
             box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 0.9em;
+            text-align: center;
         }
         
         .day-name {
-            font-size: 1.2em;
-            margin-right: 10px;
+            font-size: 1em;
         }
         
         .date-number {
-            font-size: 1.4em;
+            font-size: 1.1em;
             font-weight: 800;
         }
         
         .status-card {
             background: linear-gradient(135deg, #f8f9ff, #ffffff);
-            padding: 15px 25px;
+            padding: 12px 15px;
             border-radius: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             border: 2px dashed #667eea40;
+            flex-wrap: wrap;
         }
         
         .current-activity {
             font-weight: 600;
             color: #2d3748;
+            font-size: 0.9em;
         }
         
         .activity-name {
             color: #667eea;
-            font-size: 1.2em;
+            font-size: 1em;
             font-weight: 700;
             background: linear-gradient(135deg, #667eea20, #764ba220);
-            padding: 5px 15px;
+            padding: 5px 12px;
             border-radius: 30px;
+            word-break: break-word;
         }
         
+        /* Progress Section - Mobile Optimized */
         .progress-section {
-            padding: 0 30px 20px 30px;
+            padding: 0 15px 15px 15px;
         }
         
         .progress-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #4a5568;
             font-weight: 500;
+            font-size: 0.9em;
         }
         
         .progress-percentage {
-            font-size: 1.3em;
+            font-size: 1.1em;
             font-weight: 700;
             color: #667eea;
         }
         
         .progress-bar-container {
             width: 100%;
-            height: 12px;
+            height: 8px;
             background: #e2e8f0;
             border-radius: 20px;
             overflow: hidden;
@@ -287,35 +299,44 @@
             100% { transform: translateX(100%); }
         }
         
+        /* Planner Table - Mobile Optimized */
         .planner-table {
-            padding: 20px 30px 30px 30px;
+            padding: 0 12px 20px 12px;
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
         
         table {
             width: 100%;
             border-collapse: collapse;
-            font-size: 0.95em;
-            border-radius: 20px;
+            font-size: 0.85em;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            min-width: 300px;
         }
         
         th {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: white;
             font-weight: 600;
-            padding: 20px 15px;
-            font-size: 1.1em;
+            padding: 12px 8px;
+            font-size: 0.9em;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
         
-        th:first-child { border-radius: 15px 0 0 0; }
-        th:last-child { border-radius: 0 15px 0 0; }
+        th:first-child { 
+            border-radius: 12px 0 0 0;
+            padding-left: 10px;
+        }
+        th:last-child { 
+            border-radius: 0 12px 0 0;
+            padding-right: 10px;
+        }
         
         td {
-            padding: 18px 15px;
+            padding: 12px 8px;
             border-bottom: 2px solid #f0f0f0;
             transition: all 0.3s ease;
         }
@@ -323,16 +344,15 @@
         /* Current activity row style */
         .current-activity-row {
             background: linear-gradient(135deg, #f0f9ff, #e6f0ff);
-            border-left: 6px solid #4ade80;
+            border-left: 4px solid #4ade80;
             box-shadow: 0 5px 15px rgba(74, 222, 128, 0.2);
-            transform: scale(1.01);
             position: relative;
             animation: glow 2s infinite;
         }
         
         @keyframes glow {
-            0%, 100% { box-shadow: 0 5px 20px rgba(74, 222, 128, 0.3); }
-            50% { box-shadow: 0 10px 30px rgba(74, 222, 128, 0.5); }
+            0%, 100% { box-shadow: 0 5px 15px rgba(74, 222, 128, 0.3); }
+            50% { box-shadow: 0 8px 20px rgba(74, 222, 128, 0.5); }
         }
         
         .current-activity-row td {
@@ -354,25 +374,32 @@
             font-weight: 700;
             color: #2d3748;
             font-family: 'Courier New', monospace;
-            font-size: 1.1em;
+            font-size: 0.9em;
+            white-space: nowrap;
         }
         
         .activity-col {
             font-weight: 600;
             color: #1a202c;
+            white-space: nowrap;
         }
         
         .details-col {
             color: #4a5568;
-            line-height: 1.6;
+            line-height: 1.4;
+            font-size: 0.85em;
+            max-width: 180px;
         }
         
-        .details-col ul {
-            margin: 5px 0 0 20px;
+        .details-col div:first-child {
+            white-space: normal;
+            word-break: break-word;
         }
         
-        .details-col li {
-            margin: 3px 0;
+        .details-col div:last-child {
+            font-size: 0.8em;
+            margin-top: 5px;
+            white-space: normal;
         }
         
         .sleep-row {
@@ -380,92 +407,165 @@
             border-top: 3px solid #667eea;
         }
         
-        /* Motivational Footer */
+        /* Motivational Footer - Mobile Grid */
         .motivation-footer {
             background: linear-gradient(135deg, #1a1a2e, #16213e);
-            padding: 30px;
+            padding: 18px 12px;
             color: white;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
         }
         
         .motivation-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
-            padding: 20px;
-            border-radius: 20px;
+            padding: 12px 8px;
+            border-radius: 16px;
             text-align: center;
             transition: transform 0.3s ease;
         }
         
         .motivation-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
             background: rgba(255, 255, 255, 0.15);
         }
         
         .card-icon {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+            font-size: 1.8em;
+            margin-bottom: 5px;
             display: block;
         }
         
         .card-title {
-            font-size: 1.1em;
+            font-size: 0.9em;
             font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             color: #FFCC70;
         }
         
         .card-text {
-            font-size: 0.9em;
+            font-size: 0.75em;
             opacity: 0.9;
-            line-height: 1.5;
+            line-height: 1.4;
         }
         
         .achievement-badge {
+            grid-column: span 2;
             display: inline-block;
             background: linear-gradient(135deg, #FFD700, #FFA500);
             color: #1a1a2e;
-            padding: 8px 20px;
+            padding: 8px 15px;
             border-radius: 30px;
             font-weight: 700;
-            margin-top: 15px;
+            margin-top: 5px;
             animation: shine 3s infinite;
+            text-align: center;
+            font-size: 0.9em;
         }
         
         @keyframes shine {
-            0%, 100% { box-shadow: 0 0 20px #FFD700; }
-            50% { box-shadow: 0 0 40px #FFA500; }
+            0%, 100% { box-shadow: 0 0 15px #FFD700; }
+            50% { box-shadow: 0 0 25px #FFA500; }
         }
         
-        /* Time icons */
-        .time-icon {
-            display: inline-block;
-            margin-right: 5px;
+        /* Touch-friendly improvements */
+        tr {
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .live-header {
-                flex-direction: column;
-                align-items: flex-start;
+        tr:active {
+            opacity: 0.9;
+        }
+        
+        /* Small phone adjustments */
+        @media (max-width: 380px) {
+            .planner-container {
+                border-radius: 20px;
+            }
+            
+            .motivation-header {
+                padding: 12px 10px;
             }
             
             .quote-text {
-                font-size: 1.1em;
+                font-size: 0.85em;
             }
             
             .datetime-display {
-                width: 100%;
-                text-align: center;
+                font-size: 0.8em;
+                padding: 8px 12px;
+            }
+            
+            table {
+                font-size: 0.75em;
+            }
+            
+            td {
+                padding: 10px 5px;
+            }
+            
+            .details-col div:last-child {
+                font-size: 0.7em;
+            }
+            
+            .motivation-footer {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            
+            .achievement-badge {
+                grid-column: span 1;
+            }
+            
+            .card-text {
+                font-size: 0.7em;
             }
         }
         
-        /* Custom scrollbar */
+        /* Landscape mode optimization */
+        @media (orientation: landscape) and (max-height: 500px) {
+            .planner-container {
+                max-width: 100%;
+            }
+            
+            .motivation-header {
+                padding: 10px;
+            }
+            
+            .quote-icon {
+                font-size: 1.5em;
+            }
+            
+            .quote-text {
+                font-size: 0.85em;
+            }
+            
+            .live-header {
+                padding: 10px;
+            }
+            
+            .date-time-container {
+                flex-direction: row;
+                flex-wrap: wrap;
+                align-items: center;
+            }
+            
+            .datetime-display {
+                flex: 1;
+            }
+            
+            .planner-table {
+                max-height: 300px;
+                overflow-y: auto;
+            }
+        }
+        
+        /* Custom scrollbar for mobile */
         ::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
+            width: 4px;
+            height: 4px;
         }
         
         ::-webkit-scrollbar-track {
@@ -478,8 +578,18 @@
             border-radius: 10px;
         }
         
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #764ba2, #667eea);
+        /* Better touch targets */
+        .live-indicator, 
+        .datetime-display, 
+        .status-card,
+        .motivation-card {
+            min-height: 44px;
+        }
+        
+        .activity-name {
+            min-height: 36px;
+            display: inline-flex;
+            align-items: center;
         }
     </style>
 </head>
@@ -490,7 +600,7 @@
             <div class="quote-container">
                 <span class="quote-icon">🌟</span>
                 <div class="quote-text">
-                    "The secret of getting ahead is getting started. Every moment is a fresh beginning."
+                    "The secret of getting ahead is getting started."
                     <span class="quote-author">— Mark Twain</span>
                 </div>
             </div>
@@ -501,7 +611,7 @@
             <div class="date-time-container">
                 <div class="live-indicator">
                     <span class="pulse-dot"></span>
-                    <span class="live-text">LIVE TRACKING</span>
+                    <span class="live-text">LIVE</span>
                 </div>
                 <div class="datetime-display" id="datetimeDisplay">
                     <span class="day-name" id="dayName"></span>
@@ -510,7 +620,7 @@
                 </div>
             </div>
             <div class="status-card" id="statusCard">
-                <span>🎯 Current:</span>
+                <span class="current-activity">🎯 Now:</span>
                 <span class="activity-name" id="currentActivity">Loading...</span>
             </div>
         </div>
@@ -518,7 +628,7 @@
         <!-- Progress Bar -->
         <div class="progress-section">
             <div class="progress-header">
-                <span>Today's Progress</span>
+                <span>Day Progress</span>
                 <span class="progress-percentage" id="progressPercentage">0%</span>
             </div>
             <div class="progress-bar-container">
@@ -531,9 +641,9 @@
             <table id="plannerTable">
                 <thead>
                     <tr>
-                        <th>⏰ TIME</th>
-                        <th>📋 ACTIVITY</th>
-                        <th>✨ DETAILS & MOTIVATION</th>
+                        <th>TIME</th>
+                        <th>ACTIVITY</th>
+                        <th>DETAILS</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -542,56 +652,61 @@
             </table>
         </div>
         
-        <!-- Motivational Footer -->
+        <!-- Motivational Footer - Mobile Optimized -->
         <div class="motivation-footer">
             <div class="motivation-card">
                 <span class="card-icon">🌅</span>
-                <div class="card-title">Morning Energy</div>
-                <div class="card-text">Your morning routine sets the tone for victory. Every sunrise is an invitation to shine brighter.</div>
+                <div class="card-title">Morning</div>
+                <div class="card-text">Start strong, shine bright</div>
             </div>
             <div class="motivation-card">
                 <span class="card-icon">📚</span>
-                <div class="card-title">Learning Zone</div>
-                <div class="card-text">Japanese & Coding: Building bridges to your future, one lesson at a time.</div>
+                <div class="card-title">Learn</div>
+                <div class="card-text">Japanese & Coding</div>
             </div>
             <div class="motivation-card">
                 <span class="card-icon">💪</span>
-                <div class="card-title">Body & Mind</div>
-                <div class="card-text">Exercise and rest are not breaks from your journey—they are essential steps forward.</div>
+                <div class="card-title">Health</div>
+                <div class="card-text">Move & rest well</div>
+            </div>
+            <div class="motivation-card">
+                <span class="card-icon">✨</span>
+                <div class="card-title">Grow</div>
+                <div class="card-text">1% better daily</div>
             </div>
             <div class="achievement-badge">
-                ⭐ TODAY IS YOUR DAY ⭐
+                ⭐ YOU GOT THIS ⭐
             </div>
         </div>
     </div>
 
     <script>
-        // Schedule data
+        // Schedule data - Mobile optimized with shorter details
         const schedule = [
-            { start: "8:30", end: "8:45", period: "AM", activity: "Wake Up & Hydrate", icon: "🌅", details: "💧 Drink water • Make bed • 5 min stretch • Set intention for the day", motivation: "Rise and shine! Today is full of possibilities." },
-            { start: "8:45", end: "9:15", period: "AM", activity: "Morning Exercise", icon: "💪", details: "Option A: Cardio (jump rope/jog) • Option B: Strength training • Option C: YouTube workout", motivation: "Sweat now, shine later. Your body thanks you!" },
-            { start: "9:15", end: "9:45", period: "AM", activity: "Shower & Get Ready", icon: "🚿", details: "Freshen up • Skincare routine • Dress for success", motivation: "Look good, feel good, do good." },
-            { start: "9:45", end: "10:30", period: "AM", activity: "Breakfast & Planning", icon: "🍳", details: "Healthy breakfast • Review goals • Plan your winning strategy", motivation: "Fuel your body and mind for greatness." },
-            { start: "10:30", end: "11:00", period: "AM", activity: "Japanese (Vocabulary)", icon: "📝", details: "Anki/Flashcards review • 30 mins of focused learning", motivation: "言葉は力なり (Words are power)" },
-            { start: "11:00", end: "11:45", period: "AM", activity: "Japanese (Grammar)", icon: "📚", details: "Textbook study • Grammar patterns • Note-taking", motivation: "毎日少しずつ進歩 (Progress a little each day)" },
-            { start: "11:45", end: "12:00", period: "PM", activity: "Japanese (Listening)", icon: "🎧", details: "Anime/podcast/music • No subtitles challenge", motivation: "Train your ears, open your world." },
-            { start: "12:00", end: "1:00", period: "PM", activity: "Make Lunch", icon: "👨‍🍳", details: "Cook a meal • Listen to podcast/music • Enjoy the process", motivation: "Cooking is love made visible." },
-            { start: "1:00", end: "1:45", period: "PM", activity: "Eat Lunch", icon: "🍽️", details: "Mindful eating • No distractions • Let food settle", motivation: "Nourish to flourish." },
-            { start: "1:45", end: "3:15", period: "PM", activity: "Nap", icon: "😴", details: "Power nap • Set alarm for 3:15 PM", motivation: "Rest is not idle, it's essential." },
-            { start: "3:15", end: "4:30", period: "PM", activity: "Social Media & Relax", icon: "📱", details: "Check platforms • Reply to messages • Stand every 30 mins", motivation: "Connect mindfully, not mindlessly." },
-            { start: "4:30", end: "6:00", period: "PM", activity: "Free Time / Light Review", icon: "🎨", details: "Review Japanese • Read • Tidy up • Creative time", motivation: "Balance is the key to consistency." },
-            { start: "6:00", end: "7:00", period: "PM", activity: "Evening Walk", icon: "🚶", details: "Phone silent • Connect with nature • Breathe deeply", motivation: "Walk as if you're kissing the earth with your feet." },
-            { start: "7:00", end: "8:00", period: "PM", activity: "Evening Relaxation", icon: "🌆", details: "Snack/tea • Watch show • Listen to music", motivation: "Unwind to rewind." },
-            { start: "8:00", end: "8:30", period: "PM", activity: "Shower & Skincare", icon: "🧖", details: "Warm shower • Skincare routine • Relax muscles", motivation: "Self-care is not selfish, it's necessary." },
-            { start: "8:30", end: "9:00", period: "PM", activity: "Prepare for Coding", icon: "💻", details: "Set up computer • Review yesterday's code • Plan tonight's goals", motivation: "Code before the world sleeps." },
-            { start: "9:00", end: "9:50", period: "PM", activity: "Coding (Deep Work)", icon: "⚡", details: "New concept • Project work • Focused learning", motivation: "Every line of code is a step toward mastery." },
-            { start: "9:50", end: "10:00", period: "PM", activity: "Coding Break", icon: "💧", details: "Stand up • Stretch • Hydrate", motivation: "Short breaks, long gains." },
-            { start: "10:00", end: "10:50", period: "PM", activity: "Coding (Practice)", icon: "⌨️", details: "Exercises • Debugging • Build something", motivation: "Practice doesn't make perfect, it makes progress." },
-            { start: "10:50", end: "11:00", period: "PM", activity: "Coding (Reflect)", icon: "✍️", details: "Write down 1 thing learned today", motivation: "Reflection turns experience into insight." },
-            { start: "11:00", end: "11:30", period: "PM", activity: "Wind Down (Read)", icon: "📖", details: "No screens • Physical book • Calm mind", motivation: "Read to dream." },
-            { start: "11:30", end: "11:45", period: "PM", activity: "Wind Down (Journal)", icon: "📓", details: "Journal thoughts • Plan tomorrow", motivation: "Clear mind, clear path." },
-            { start: "11:45", end: "12:00", period: "AM", activity: "Wind Down (Prepare)", icon: "🌙", details: "Dim lights • Deep breathing • Gratitude", motivation: "Grateful today, ready for tomorrow." },
-            { start: "12:00", end: "8:30", period: "AM", activity: "Sleep", icon: "😴", details: "Rest and recharge • Dream big", motivation: "Sleep is the best meditation." }
+            { start: "8:30", end: "8:45", period: "AM", activity: "Wake Up", icon: "🌅", details: "💧 Water • Make bed • Stretch", motivation: "Begin with gratitude" },
+            { start: "8:45", end: "9:15", period: "AM", activity: "Exercise", icon: "💪", details: "Cardio • Strength • YouTube", motivation: "Sweat daily" },
+            { start: "9:15", end: "9:45", period: "AM", activity: "Freshen Up", icon: "🚿", details: "Shower • Skincare • Get ready", motivation: "Look good, feel good" },
+            { start: "9:45", end: "10:30", period: "AM", activity: "Breakfast", icon: "🍳", details: "Eat • Plan goals", motivation: "Fuel for success" },
+            { start: "10:30", end: "11:00", period: "AM", activity: "Japanese Vocab", icon: "📝", details: "Anki/Flashcards", motivation: "Words = power" },
+            { start: "11:00", end: "11:45", period: "AM", activity: "Japanese Grammar", icon: "📚", details: "Textbook study", motivation: "毎日少しずつ" },
+            { start: "11:45", end: "12:00", period: "PM", activity: "Japanese Listening", icon: "🎧", details: "Anime/Podcast", motivation: "Train your ears" },
+            { start: "12:00", end: "1:00", period: "PM", activity: "Make Lunch", icon: "👨‍🍳", details: "Cook • Podcast", motivation: "Love made visible" },
+            { start: "1:00", end: "1:45", period: "PM", activity: "Eat Lunch", icon: "🍽️", details: "Mindful eating", motivation: "Nourish to flourish" },
+            { start: "1:45", end: "3:15", period: "PM", activity: "Nap", icon: "😴", details: "Power nap • Alarm 3:15", motivation: "Rest is essential" },
+            { start: "3:15", end: "4:30", period: "PM", activity: "Social Media", icon: "📱", details: "Check apps • Reply", motivation: "Connect mindfully" },
+            { start: "4:30", end: "6:00", period: "PM", activity: "Free Time", icon: "🎨", details: "Review • Read • Tidy", motivation: "Balance is key" },
+            { start: "6:00", end: "7:00", period: "PM", activity: "Evening Walk", icon: "🚶", details: "Phone silent • Nature", motivation: "Walk with purpose" },
+            { start: "7:00", end: "8:00", period: "PM", activity: "Relax", icon: "🌆", details: "Snack • Show • Music", motivation: "Unwind to rewind" },
+            { start: "8:00", end: "8:30", period: "PM", activity: "Shower", icon: "🧖", details: "Warm shower • Skincare", motivation: "Self-care matters" },
+            { start: "8:30", end: "9:00", period: "PM", activity: "Prep Coding", icon: "💻", details: "Setup • Review", motivation: "Prepare to build" },
+            { start: "9:00", end: "9:50", period: "PM", activity: "Code Deep Work", icon: "⚡", details: "New concepts • Project", motivation: "Code with purpose" },
+            { start: "9:50", end: "10:00", period: "PM", activity: "Code Break", icon: "💧", details: "Stretch • Water", motivation: "Short breaks win" },
+            { start: "10:00", end: "10:50", period: "PM", activity: "Code Practice", icon: "⌨️", details: "Exercises • Debug", motivation: "Practice = progress" },
+            { start: "10:50", end: "11:00", period: "PM", activity: "Code Reflect", icon: "✍️", details: "Note 1 thing learned", motivation: "Reflect to grow" },
+            { start: "11:00", end: "11:30", period: "PM", activity: "Read", icon: "📖", details: "Physical book", motivation: "Read to dream" },
+            { start: "11:30", end: "11:45", period: "PM", activity: "Journal", icon: "📓", details: "Write • Plan tomorrow", motivation: "Clear mind" },
+            { start: "11:45", end: "12:00", period: "AM", activity: "Prepare Sleep", icon: "🌙", details: "Dim lights • Breathe", motivation: "Gratitude" },
+            { start: "12:00", end: "8:30", period: "AM", activity: "Sleep", icon: "😴", details: "Rest • Recharge", motivation: "Dream big" }
         ];
 
         // Convert time string to minutes for comparison
@@ -625,25 +740,23 @@
         // Format current date and time
         function updateDateTime() {
             const now = new Date();
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
             
             const dayName = days[now.getDay()];
             const month = months[now.getMonth()];
             const date = now.getDate();
-            const year = now.getFullYear();
             
             let hours = now.getHours();
             const minutes = now.getMinutes().toString().padStart(2, '0');
-            const seconds = now.getSeconds().toString().padStart(2, '0');
             const ampm = hours >= 12 ? 'PM' : 'AM';
             
             hours = hours % 12;
-            hours = hours ? hours : 12; // 0 should be 12
+            hours = hours ? hours : 12;
             
-            document.getElementById('dayName').textContent = dayName + ',';
-            document.getElementById('dateNumber').textContent = `${month} ${date}, ${year}`;
-            document.getElementById('timeDisplay').textContent = ` 🕐 ${hours}:${minutes}:${seconds} ${ampm}`;
+            document.getElementById('dayName').textContent = dayName;
+            document.getElementById('dateNumber').textContent = `${month} ${date}`;
+            document.getElementById('timeDisplay').textContent = ` ${hours}:${minutes} ${ampm}`;
         }
 
         // Calculate day progress percentage
@@ -676,7 +789,6 @@
                     const itemStart = timeToMinutes(item.start, item.period);
                     const itemEnd = timeToMinutes(item.end, item.period);
                     
-                    // Handle overnight activities
                     if (itemEnd < itemStart) {
                         return current >= itemEnd && current < itemStart ? false : current >= itemStart;
                     }
@@ -707,16 +819,14 @@
                 // Activity with icon
                 const activityDisplay = `${item.icon} ${item.activity}`;
                 
-                // Details with motivation
+                // Details with motivation (mobile optimized)
                 const detailsDisplay = `
                     <div>${item.details}</div>
-                    <div style="color: #8b5cf6; font-style: italic; margin-top: 8px; font-size: 0.9em;">
-                        💭 ${item.motivation}
-                    </div>
+                    <div style="color: #8b5cf6; font-style: italic; font-size: 0.75em;">💭 ${item.motivation}</div>
                 `;
                 
                 row.innerHTML = `
-                    <td class="time-col">⏱️ ${timeDisplay}</td>
+                    <td class="time-col">${timeDisplay}</td>
                     <td class="activity-col">${activityDisplay}</td>
                     <td class="details-col">${detailsDisplay}</td>
                 `;
@@ -729,7 +839,7 @@
                 document.getElementById('currentActivity').textContent = 
                     `${currentActivityFound.icon} ${currentActivityFound.activity}`;
             } else {
-                document.getElementById('currentActivity').textContent = '🎉 Between activities';
+                document.getElementById('currentActivity').textContent = '🎉 Break time';
             }
         }
 
