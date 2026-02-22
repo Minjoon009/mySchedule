@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="coverForm" id="coverForm" style="display: none"></div>
+    <div id="main_container">
+      <h1 class="header">Daily Planner</h1>
+      <div class="now_activity_container">
+        <p>Now : <span id="now_activity_span"></span></p>
+      </div>
+      <button id="btnAddActivity">+</button>
+      <table id="tbl_schedule">
+        <tr>
+          <th>TIME</th>
+          <th>ACTIVITY</th>
+          <th>DETAILS</th>
+        </tr>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
