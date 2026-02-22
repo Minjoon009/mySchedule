@@ -1,6 +1,6 @@
 function getData() {
   data = JSON.parse(localStorage.getItem("schedule_data"));
-  return data ? data : "";
+  return data ? data : [];
 }
 // <div class="date_now">
 //   Tue <span class="day_month">Feb 17</span> 11:00 PM
@@ -253,3 +253,4 @@ function convertTo12HourFormat(time24h, format) {
 //         motivation: "💭 Begin with gratitude",
 //       },
 //     ]
+
